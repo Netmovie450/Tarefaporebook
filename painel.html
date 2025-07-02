@@ -3,58 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel do Usuário</title>
+  <title>Painel do Usuário - Tarefa por eBook</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #e8f5e9, #c8e6c9);
       margin: 0;
-      padding: 0;
+      background: linear-gradient(to right, #fbe9e7, #ffcdd2);
     }
     header {
-      background-color: #2e7d32;
+      background: linear-gradient(90deg, #d32f2f, #f44336);
       color: white;
-      padding: 20px;
+      padding: 30px;
       text-align: center;
     }
+    nav {
+      background-color: #b71c1c;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 10px 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
     .container {
-      max-width: 800px;
-      margin: 30px auto;
+      max-width: 700px;
+      margin: 40px auto;
       background: #fff;
-      padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
     }
     h2 {
-      color: #2e7d32;
+      color: #d32f2f;
     }
     .saldo {
-      font-size: 22px;
+      font-size: 26px;
+      color: green;
+      margin: 20px 0;
       font-weight: bold;
-      margin-bottom: 20px;
     }
-    .tarefa {
-      background-color: #f1f8e9;
-      border-left: 6px solid #66bb6a;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 8px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #43a047;
-      color: white;
+    .btn {
+      padding: 12px 30px;
       border: none;
       border-radius: 8px;
+      background-color: #d32f2f;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 20px;
     }
-    button:hover {
-      background-color: #2e7d32;
+    .btn:hover {
+      background-color: #b71c1c;
     }
     footer {
-      background-color: #1b5e20;
+      background-color: #333;
       color: white;
       text-align: center;
       padding: 15px;
@@ -65,84 +77,62 @@
 <body>
 
   <header>
-    <h1>👤 Painel do Usuário</h1>
-    <p>Controle seu saldo e conclua tarefas para ganhar dinheiro.</p>
+    <h1>📊 Painel do Usuário</h1>
+    <p>Acompanhe seu progresso e saldo</p>
   </header>
 
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="tarefas.html">Tarefas</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="contato.html">Contato</a>
+    <a href="#" onclick="logout()">Sair</a>
+  </nav>
+
   <div class="container">
-    <h2>💰 Seu Saldo:</h2>
-    <p class="saldo" id="saldo">Carregando...</p>
-
-    <h2>📝 Tarefas Disponíveis:</h2>
-    <div class="tarefa">
-      <p><strong>Tarefa:</strong> Assistir vídeo promocional</p>
-      <p><strong>Valor:</strong> +3 MZN</p>
-      <button onclick="concluirTarefa(3)">Marcar como concluída</button>
-    </div>
-
-    <div class="tarefa">
-      <p><strong>Tarefa:</strong> Compartilhar o site com 5 amigos</p>
-      <p><strong>Valor:</strong> +5 MZN</p>
-      <button onclick="concluirTarefa(5)">Marcar como concluída</button>
-    </div>
-
-    <h2>📤 Solicitar levantamento:</h2>
-    <button onclick="solicitarLevantamento()">Levantar Dinheiro</button>
+    <h2>👋 Bem-vindo ao seu painel!</h2>
+    <p class="saldo">💰 Saldo atual: <span id="saldo">Carregando...</span> MZN</p>
+    <button class="btn" onclick="window.location.href='tarefas.html'">📄 Ver Tarefas</button>
   </div>
 
   <footer>
-    &copy; 2025 - Tarefa por eBook | Desenvolvido por Lan Movie
+    &copy; 2025 - Tarefa por eBook | Seu painel pessoal
   </footer>
 
-  <!-- Firebase SDK compat -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-  <!-- Configuração Firebase -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBGAmqoDIy08FOJSWlimG0yXwfKnBbUeas",
       authDomain: "tarefaporebook.firebaseapp.com",
       projectId: "tarefaporebook",
-      storageBucket: "tarefaporebook.firebasestorage.app",
+      storageBucket: "tarefaporebook.appspot.com",
       messagingSenderId: "1040636896600",
       appId: "1:1040636896600:web:cd3003e00e45674ec5f12d"
     };
     firebase.initializeApp(firebaseConfig);
-  </script>
 
-  <!-- Script do painel -->
-  <script>
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        const uid = user.uid;
-        const ref = firebase.database().ref("usuarios/" + uid);
-        ref.on("value", snapshot => {
-          const saldo = snapshot.val()?.saldo || 0;
-          document.getElementById("saldo").innerText = saldo.toFixed(2) + " MZN";
+        const ref = firebase.database().ref("usuarios/" + user.uid);
+        ref.on("value", snap => {
+          const saldo = snap.val()?.saldo || 0;
+          document.getElementById("saldo").innerText = saldo.toFixed(2);
         });
       } else {
         window.location.href = "login.html";
       }
     });
 
-    function concluirTarefa(valor) {
-      const user = firebase.auth().currentUser;
-      if (!user) return;
-
-      const ref = firebase.database().ref("usuarios/" + user.uid);
-      ref.once("value").then(snapshot => {
-        const saldoAtual = snapshot.val()?.saldo || 0;
-        ref.update({ saldo: saldoAtual + valor });
-        alert("Tarefa concluída! + " + valor + " MZN");
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        window.location.href = "login.html";
       });
-    }
-
-    function solicitarLevantamento() {
-      alert("Pedido de levantamento enviado. Aguarde aprovação do administrador.");
     }
   </script>
 
 </body>
-    </html>
+  </html>
