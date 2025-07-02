@@ -29,6 +29,7 @@
       margin: 10px 0;
       border-radius: 8px;
       border: 1px solid #ddd;
+      font-size: 16px;
     }
     button {
       width: 100%;
@@ -39,6 +40,7 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
+      font-weight: bold;
     }
     button:hover {
       background-color: #880e4f;
@@ -51,6 +53,11 @@
       color: #c2185b;
       text-decoration: none;
     }
+    #mensagem {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -61,7 +68,7 @@
     <input type="password" id="senha" placeholder="Digite sua senha" required>
     <button onclick="fazerLogin()">Entrar</button>
     <p>Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
-    <p id="mensagem" style="color: red; text-align: center;"></p>
+    <p id="mensagem"></p>
   </div>
 
   <!-- Firebase SDK compat -->
@@ -84,13 +91,22 @@
   <!-- Lógica de Login -->
   <script>
     function fazerLogin() {
-      const email = document.getElementById('email').value;
-      const senha = document.getElementById('senha').value;
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+      const mensagem = document.getElementById('mensagem');
+
+      mensagem.innerText = "";
+
+      if (!email || !senha) {
+        mensagem.innerText = "Por favor, preencha todos os campos.";
+        return;
+      }
 
       firebase.auth().signInWithEmailAndPassword(email, senha)
         .then(userCredential => {
           const userEmail = userCredential.user.email;
-          // Redirecionar se for admin
+
+          // Redirecionar com base no email
           if (userEmail === "netmovie450@gmail.com") {
             window.location.href = "admin.html";
           } else {
@@ -98,7 +114,13 @@
           }
         })
         .catch(error => {
-          document.getElementById('mensagem').innerText = "Erro: " + error.message;
+          let erro = error.message;
+          if (error.code === "auth/user-not-found") {
+            erro = "Usuário não encontrado.";
+          } else if (error.code === "auth/wrong-password") {
+            erro = "Senha incorreta.";
+          }
+          mensagem.innerText = "Erro: " + erro;
         });
     }
   </script>
