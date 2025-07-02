@@ -9,12 +9,12 @@
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
-      background: linear-gradient(to right, #fbe9e7, #ffcdd2);
+      background: linear-gradient(to right, #ffebee, #ffcdd2);
     }
     header {
       background: linear-gradient(90deg, #d32f2f, #f44336);
       color: white;
-      padding: 30px;
+      padding: 40px 20px;
       text-align: center;
     }
     nav {
@@ -22,25 +22,26 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 10px;
+      padding: 15px;
     }
     nav a {
       color: white;
-      margin: 10px 15px;
+      margin: 10px 20px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      transition: 0.3s;
     }
     nav a:hover {
-      text-decoration: underline;
+      color: #ffd54f;
     }
     .container {
       max-width: 700px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 12px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 16px;
       padding: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     h2 {
       color: #d32f2f;
@@ -48,28 +49,28 @@
     .saldo {
       font-size: 26px;
       color: green;
-      margin: 20px 0;
       font-weight: bold;
+      margin: 20px 0;
     }
     .btn {
-      padding: 12px 30px;
-      border: none;
-      border-radius: 8px;
+      padding: 12px 28px;
       background-color: #d32f2f;
       color: white;
+      border: none;
+      border-radius: 25px;
       font-size: 16px;
-      font-weight: bold;
       cursor: pointer;
-      margin-top: 20px;
+      margin: 10px;
     }
     .btn:hover {
       background-color: #b71c1c;
     }
     footer {
       background-color: #333;
-      color: white;
       text-align: center;
-      padding: 15px;
+      color: white;
+      padding: 20px;
+      font-size: 14px;
       margin-top: 40px;
     }
   </style>
@@ -78,7 +79,7 @@
 
   <header>
     <h1>📊 Painel do Usuário</h1>
-    <p>Acompanhe seu progresso e saldo</p>
+    <p>Gerencie seu progresso, tarefas e saldo com facilidade</p>
   </header>
 
   <nav>
@@ -90,13 +91,14 @@
   </nav>
 
   <div class="container">
-    <h2>👋 Bem-vindo ao seu painel!</h2>
-    <p class="saldo">💰 Saldo atual: <span id="saldo">Carregando...</span> MZN</p>
+    <h2>👋 Bem-vindo!</h2>
+    <p class="saldo">💰 Seu saldo: <span id="saldo">Carregando...</span> MZN</p>
     <button class="btn" onclick="window.location.href='tarefas.html'">📄 Ver Tarefas</button>
+    <button class="btn" onclick="logout()">🚪 Sair</button>
   </div>
 
   <footer>
-    &copy; 2025 - Tarefa por eBook | Seu painel pessoal
+    &copy; 2025 - Tarefa por eBook | Desenvolvido com ❤️ por Lan Movie
   </footer>
 
   <!-- Firebase -->
@@ -135,4 +137,4 @@
   </script>
 
 </body>
-  </html>
+</html>
