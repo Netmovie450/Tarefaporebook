@@ -1,32 +1,128 @@
-<!DOCTYPE html>
+<html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Início - Trabalhos e eBooks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarefa por eBook</title>
+  <link rel="stylesheet" href="css/estilo.css" />
   <style>
-    body { font-family: sans-serif; background-color: #fff0f0; margin: 0; color: #333; }
-    header { background: #c20000; padding: 1em; color: white; text-align: center; }
-    nav a { margin: 0 10px; color: white; text-decoration: none; font-weight: bold; }
-    .container { padding: 20px; text-align: center; }
-    .btn { background: #c20000; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+    }
+    header {
+      background-color: #d32f2f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #b71c1c;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 10px 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 20px auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      color: #b71c1c;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #b71c1c;
+    }
+    footer {
+      background-color: #eee;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>🔥 Tarefa por Hora 🔥</h1>
-    <nav>
-      <a href="trabalhos.html">Trabalhos</a>
-      <a href="ebooks.html">eBooks</a>
-      <a href="ganhar.html">Ganhar Dinheiro</a>
-      <a href="painel.html">Painel</a>
-      <a href="sites.html">Sites de Trabalhos</a>
-    </nav>
+    <h1>📘 Tarefa por eBook</h1>
+    <p>Ganhe dinheiro por tarefas, venda de eBooks e muito mais!</p>
   </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="tarefas.html">Tarefas</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="login.html">Login</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+
   <div class="container">
-    <h2>Bem-vindo ao seu portal para ganhar dinheiro e vender eBooks!</h2>
-    <p>Realize tarefas, venda produtos e fature com cliques reais.</p>
-    <a class="btn" href="cadastro.html">Começar Agora</a>
+    
+    <div class="card">
+      <h2>🧾 Quem Somos?</h2>
+      <p><strong>Tarefa por eBook</strong> é um site moderno que permite você <strong>ganhar dinheiro real</strong> realizando tarefas simples como responder perguntas, assistir vídeos, clicar em links e também vendendo pacotes de internet ou eBooks.</p>
+      <p>Ideal para estudantes, trabalhadores informais e empreendedores digitais de Moçambique!</p>
+    </div>
+
+    <div class="card">
+      <h2>💡 Como Funciona?</h2>
+      <ul style="text-align: left; max-width: 600px; margin: auto;">
+        <li>✅ Cadastre-se gratuitamente</li>
+        <li>✅ Acesse tarefas disponíveis todos os dias</li>
+        <li>✅ Acumule saldo conforme completa ações</li>
+        <li>✅ Solicite pagamentos via M-Pesa, E-Mola ou PayPal</li>
+        <li>✅ Venda produtos como eBooks e megabytes</li>
+      </ul>
+      <a href="login.html"><button>Comece Agora</button></a>
+    </div>
+
+    <div class="card">
+      <h2>📚 Venda de Produtos</h2>
+      <p>Temos os melhores <strong>eBooks</strong>, pacotes de dados (MBs) e serviços extras disponíveis para venda.</p>
+      <a href="produtos.html"><button>Ver Produtos</button></a>
+    </div>
+
+    <div class="card">
+      <h2>💬 Fale Connosco</h2>
+      <p>Está com dúvidas ou precisa de ajuda? Entre em contato por WhatsApp ou preencha nosso formulário de contato.</p>
+      <a href="contato.html"><button>Falar com Suporte</button></a>
+    </div>
+
   </div>
+
+  <footer>
+    &copy; 2025 - Tarefa por eBook | Criado por Lan Movie
+  </footer>
+
 </body>
-</html>
+  </html>
