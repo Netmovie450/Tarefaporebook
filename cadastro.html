@@ -4,4 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro - Tarefa por eBook</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #bbdefb);
+      margin: 0;
+    }
+    .container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #1976d2;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0d47a1;
+    }
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+    a {
+      color: #1976d2;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📝 Criar Conta</h2>
+    <input type="email" id="email" placeholder="Seu email" required />
+    <input type="password" id="senha" placeholder="Crie uma senha" required />
+    <button onclick="registrar()">Cadastrar</button>
+    <p>Já tem conta? <a href="login.html">Fazer login</a></p>
+    <p id="mensagem" style="text-align: center; color: green;"></p>
+    <p id="erro" style="text-align: center; color: red;"></p>
+  </div>
+
+  <!-- Firebase SDK compat -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+  <!-- Firebase Configuração -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGAmqoDIy08FOJSWlimG0yXwfKnBbUeas",
+      authDomain: "tarefaporebook.firebaseapp.com",
+      projectId: "tarefaporebook",
+      storageBucket: "tarefaporebook.firebasestorage.app",
+      messagingSenderId: "1040636896600",
+      appId: "1:1040636896600:web:cd3003e00e45674ec5f12d"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Script de cadastro -->
+  <script>
+    function registrar() {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      firebase.auth().createUserWithEmailAndPassword(email, senha)
+        .then(userCredential => {
+          const userId = userCredential.user.uid;
+          // Inicializa o saldo no banco de dados
+          firebase.database().ref("usuarios/" + userId).set({
+            saldo: 0
+          });
+
+          document.getElementById("mensagem").innerText = "Conta criada com sucesso!";
+          document.getElementById("erro").innerText = "";
+          setTimeout(() => window.location.href = "painel.html", 1500);
+        })
+        .catch(error => {
+          document.getElementById("erro").innerText = "Erro: " + error.message;
+          document.getElementById("mensagem").innerText = "";
+        });
+    }
+  </script>
+
+</body>
+  </html>
