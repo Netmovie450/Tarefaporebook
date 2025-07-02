@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro/Login</title>
+</head>
+<body>
+  <h2>Cadastro / Login</h2>
+  <input type="email" id="email" placeholder="Email"><br><br>
+  <input type="password" id="senha" placeholder="Senha"><br><br>
+  <button onclick="cadastrar()">Cadastrar</button>
+  <button onclick="login()">Entrar</button>
+
+  <!-- Firebase e config -->
+  <script src="firebase-config.js"></script>
+
+  <script>
+    function cadastrar() {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+      firebase.auth().createUserWithEmailAndPassword(email, senha)
+        .then(() => alert("Cadastro feito!"))
+        .catch(erro => alert("Erro: " + erro.message));
+    }
+
+    function login() {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+      firebase.auth().signInWithEmailAndPassword(email, senha)
+        .then(() => {
+          alert("Login realizado!");
+          window.location.href = "painel.html";
+        })
+        .catch(erro => alert("Erro: " + erro.message));
+    }
+  </script>
+</body>
+</html>
