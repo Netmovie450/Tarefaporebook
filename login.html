@@ -13,7 +13,7 @@
     }
     .container {
       max-width: 400px;
-      margin: 80px auto;
+      margin: 50px auto;
       padding: 30px;
       background: #fff;
       border-radius: 12px;
@@ -58,6 +58,28 @@
       text-align: center;
       margin-top: 10px;
     }
+    .tarefas-preview {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #fff0f5;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .tarefas-preview h3 {
+      color: #c2185b;
+      margin-bottom: 15px;
+    }
+    .tarefas-preview ul {
+      list-style: none;
+      padding-left: 0;
+      text-align: left;
+      margin: 0 auto;
+      max-width: 300px;
+    }
+    .tarefas-preview li {
+      margin: 8px 0;
+      font-size: 15px;
+    }
   </style>
 </head>
 <body>
@@ -69,6 +91,19 @@
     <button onclick="fazerLogin()">Entrar</button>
     <p>Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
     <p id="mensagem"></p>
+
+    <!-- ✅ Vitrine de Tarefas -->
+    <div class="tarefas-preview">
+      <h3>📋 Tarefas disponíveis</h3>
+      <ul>
+        <li>📺 Assistir vídeo – <strong>+299 MZN</strong></li>
+        <li>📝 Responder pesquisa – <strong>+39 MZN</strong></li>
+        <li>🌐 Visitar site parceiro – <strong>+199 MZN</strong></li>
+        <li>📤 Compartilhar no WhatsApp – <strong>+59 MZN</strong></li>
+        <li>📲 Instalar aplicativo – <strong>+79 MZN</strong></li>
+      </ul>
+      <p><a href="tarefas.html">➡️ Ver todas as tarefas</a></p>
+    </div>
   </div>
 
   <!-- Firebase SDK compat -->
@@ -126,4 +161,4 @@
   </script>
 
 </body>
-</html>
+                                        </html>
