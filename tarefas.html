@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tarefas - Tarefa por eBook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fbe9e7, #ffcdd2);
+    }
+    header {
+      background: linear-gradient(90deg, #d32f2f, #f44336);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    nav {
+      background-color: #b71c1c;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 10px 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .task {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .task:hover {
+      transform: translateY(-4px);
+    }
+    .task h3 {
+      color: #d32f2f;
+    }
+    .task p {
+      margin: 10px 0;
+    }
+    .btn {
+      background-color: #d32f2f;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn:hover {
+      background-color: #b71c1c;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📝 Tarefas Disponíveis</h1>
+    <p>Ganhe dinheiro agora completando estas ações</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="tarefas.html">Tarefas</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="login.html">Login</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+
+  <div class="container">
+    <div class="task">
+      <h3>📺 Assistir vídeo no YouTube</h3>
+      <p>Assista ao vídeo completo e ganhe <strong>2 MZN</strong></p>
+      <a href="https://youtube.com" target="_blank"><button class="btn">Abrir Tarefa</button></a>
+    </div>
+
+    <div class="task">
+      <h3>📝 Responder pesquisa rápida</h3>
+      <p>Responda 5 perguntas sobre hábitos diários. Ganhe <strong>3 MZN</strong></p>
+      <a href="https://forms.gle" target="_blank"><button class="btn">Responder</button></a>
+    </div>
+
+    <div class="task">
+      <h3>🌐 Visitar site parceiro</h3>
+      <p>Clique no link e permaneça no site por 30 segundos. Ganhe <strong>1 MZN</strong></p>
+      <a href="https://example.com" target="_blank"><button class="btn">Visitar</button></a>
+    </div>
+
+    <div class="task">
+      <h3>📤 Compartilhar nosso link no WhatsApp</h3>
+      <p>Compartilhe com 5 grupos ou amigos. Ganhe <strong>5 MZN</strong></p>
+      <a href="https://wa.me/?text=https://netmovie450.github.io/Tarefaporebook/" target="_blank">
+        <button class="btn">Compartilhar</button>
+      </a>
+    </div>
+
+    <div class="task">
+      <h3>📲 Instalar aplicativo sugerido</h3>
+      <p>Baixe e instale o app indicado. Ganhe <strong>7 MZN</strong></p>
+      <a href="https://play.google.com" target="_blank"><button class="btn">Instalar</button></a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 - Tarefa por eBook | Todas as tarefas são verificadas manualmente
+  </footer>
+
+</body>
+</html>
