@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tarefa por eBook</title>
-  <link rel="stylesheet" href="css/estilo.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffebee, #ffcdd2);
     }
     header {
-      background-color: #d32f2f;
+      background: linear-gradient(90deg, #d32f2f, #f44336);
       color: white;
-      padding: 20px;
+      padding: 40px 20px;
       text-align: center;
     }
     nav {
@@ -22,52 +22,64 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 10px;
+      padding: 15px;
     }
     nav a {
       color: white;
-      margin: 10px 15px;
+      margin: 10px 20px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      transition: 0.3s;
     }
     nav a:hover {
-      text-decoration: underline;
+      color: #ffd54f;
     }
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 30px auto;
       padding: 20px;
       text-align: center;
     }
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 25px;
-      margin: 20px auto;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      padding: 30px;
+      margin: 25px auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
     }
     .card h2 {
-      color: #b71c1c;
+      color: #d32f2f;
     }
     button {
-      padding: 10px 20px;
+      padding: 12px 28px;
       background-color: #d32f2f;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 25px;
       font-size: 16px;
       cursor: pointer;
+      transition: background 0.3s;
       margin-top: 15px;
     }
     button:hover {
       background-color: #b71c1c;
     }
     footer {
-      background-color: #eee;
+      background-color: #333;
       text-align: center;
-      padding: 15px;
-      margin-top: 30px;
+      color: white;
+      padding: 20px;
       font-size: 14px;
+      margin-top: 40px;
+    }
+    ul {
+      text-align: left;
+      max-width: 600px;
+      margin: 20px auto;
     }
   </style>
 </head>
@@ -75,7 +87,7 @@
 
   <header>
     <h1>📘 Tarefa por eBook</h1>
-    <p>Ganhe dinheiro por tarefas, venda de eBooks e muito mais!</p>
+    <p>Ganhe dinheiro fazendo tarefas, vendendo eBooks e muito mais!</p>
   </header>
 
   <nav>
@@ -90,39 +102,38 @@
     
     <div class="card">
       <h2>🧾 Quem Somos?</h2>
-      <p><strong>Tarefa por eBook</strong> é um site moderno que permite você <strong>ganhar dinheiro real</strong> realizando tarefas simples como responder perguntas, assistir vídeos, clicar em links e também vendendo pacotes de internet ou eBooks.</p>
-      <p>Ideal para estudantes, trabalhadores informais e empreendedores digitais de Moçambique!</p>
+      <p><strong>Tarefa por eBook</strong> é uma plataforma inovadora onde você pode ganhar dinheiro real realizando tarefas simples e vendendo produtos digitais como eBooks e megabytes. Tudo isso com suporte rápido e transparente!</p>
     </div>
 
     <div class="card">
       <h2>💡 Como Funciona?</h2>
-      <ul style="text-align: left; max-width: 600px; margin: auto;">
+      <ul>
         <li>✅ Cadastre-se gratuitamente</li>
-        <li>✅ Acesse tarefas disponíveis todos os dias</li>
-        <li>✅ Acumule saldo conforme completa ações</li>
-        <li>✅ Solicite pagamentos via M-Pesa, E-Mola ou PayPal</li>
-        <li>✅ Venda produtos como eBooks e megabytes</li>
+        <li>✅ Acesse tarefas disponíveis diariamente</li>
+        <li>✅ Ganhe saldo ao completar ações</li>
+        <li>✅ Solicite pagamento via M-Pesa, E-Mola ou PayPal</li>
+        <li>✅ Venda produtos e receba diretamente</li>
       </ul>
-      <a href="login.html"><button>Comece Agora</button></a>
+      <a href="login.html"><button>Começar Agora</button></a>
     </div>
 
     <div class="card">
-      <h2>📚 Venda de Produtos</h2>
-      <p>Temos os melhores <strong>eBooks</strong>, pacotes de dados (MBs) e serviços extras disponíveis para venda.</p>
+      <h2>📚 Nossos Produtos</h2>
+      <p>Conheça nossos eBooks exclusivos, pacotes de internet e serviços digitais disponíveis para venda.</p>
       <a href="produtos.html"><button>Ver Produtos</button></a>
     </div>
 
     <div class="card">
-      <h2>💬 Fale Connosco</h2>
-      <p>Está com dúvidas ou precisa de ajuda? Entre em contato por WhatsApp ou preencha nosso formulário de contato.</p>
+      <h2>📞 Suporte e Contato</h2>
+      <p>Fale conosco pelo WhatsApp ou envie uma mensagem pelo formulário. Responderemos o mais rápido possível!</p>
       <a href="contato.html"><button>Falar com Suporte</button></a>
     </div>
 
   </div>
 
   <footer>
-    &copy; 2025 - Tarefa por eBook | Criado por Lan Movie
+    &copy; 2025 - Tarefa por eBook | Desenvolvido com ❤️ por Lan Movie
   </footer>
 
 </body>
-  </html>
+</html>
