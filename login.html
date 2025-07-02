@@ -94,11 +94,11 @@
 
     <!-- ✅ Vitrine de Tarefas -->
     <div class="tarefas-preview">
-      <h3>📋 Tarefas disponíveis</h3>
+      <h3>📋 Tarefas que você pode fazer:</h3>
       <ul>
-        <li>📺 Assistir vídeo – <strong>+299 MZN</strong></li>
-        <li>📝 Responder pesquisa – <strong>+39 MZN</strong></li>
-        <li>🌐 Visitar site parceiro – <strong>+199 MZN</strong></li>
+        <li>📺 Assistir vídeo – <strong>+29 MZN</strong></li>
+        <li>📝 Responder pesquisa – <strong>+35 MZN</strong></li>
+        <li>🌐 Visitar site parceiro – <strong>+18 MZN</strong></li>
         <li>📤 Compartilhar no WhatsApp – <strong>+59 MZN</strong></li>
         <li>📲 Instalar aplicativo – <strong>+79 MZN</strong></li>
       </ul>
@@ -106,7 +106,7 @@
     </div>
   </div>
 
-  <!-- Firebase SDK compat -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
@@ -141,7 +141,7 @@
         .then(userCredential => {
           const userEmail = userCredential.user.email;
 
-          // Redirecionar com base no email
+          // Redirecionamento com base no email
           if (userEmail === "netmovie450@gmail.com") {
             window.location.href = "admin.html";
           } else {
@@ -161,4 +161,4 @@
   </script>
 
 </body>
-                                        </html>
+  </html>
