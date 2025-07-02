@@ -1,26 +1,152 @@
-<!DOCTYPE html>
+<html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <title>Painel do Usuário</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel - Tarefa por eBook</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f1f8e9, #dcedc8);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #388e3c;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .painel {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #388e3c;
+    }
+    .saldo {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .tarefa {
+      background-color: #f9fbe7;
+      border-left: 6px solid #8bc34a;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #2e7d32;
+    }
+    footer {
+      background-color: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
-  <h1>🎉 Bem-vindo!</h1>
-  <p>Você está logado.</p>
-  <button onclick="logout()">Sair</button>
 
-  <script src="firebase-config.js"></script>
+  <header>
+    <h1>👤 Painel do Usuário</h1>
+    <p>Bem-vindo ao seu espaço! Aqui você controla seus ganhos e tarefas.</p>
+  </header>
+
+  <div class="painel">
+    <h2>💰 Seu Saldo Atual:</h2>
+    <p class="saldo" id="saldo">Carregando...</p>
+
+    <h2>🧾 Tarefas Ativas:</h2>
+    <div class="tarefa">
+      <p><strong>Tarefa:</strong> Assistir vídeo e comentar</p>
+      <p><strong>Recompensa:</strong> 3 MZN</p>
+      <button onclick="concluirTarefa(3)">Marcar como Concluída</button>
+    </div>
+
+    <div class="tarefa">
+      <p><strong>Tarefa:</strong> Compartilhar link do site</p>
+      <p><strong>Recompensa:</strong> 5 MZN</p>
+      <button onclick="concluirTarefa(5)">Marcar como Concluída</button>
+    </div>
+
+    <h2>📤 Solicitar Levantamento:</h2>
+    <button onclick="solicitarSaque()">Levantar Dinheiro</button>
+  </div>
+
+  <footer>
+    &copy; 2025 - Tarefa por eBook | Desenvolvido por Lan Movie
+  </footer>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+  <!-- Configuração do Firebase -->
   <script>
+    const firebaseConfig = {
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_DOMINIO.firebaseapp.com",
+      databaseURL: "https://SEU_DOMINIO.firebaseio.com",
+      projectId: "SEU_PROJECT_ID",
+      storageBucket: "SEU_BUCKET.appspot.com",
+      messagingSenderId: "SEU_SENDER_ID",
+      appId: "SEU_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Script do Painel -->
+  <script>
+    const userIdKey = "saldo_usuario";
+
     firebase.auth().onAuthStateChanged(user => {
-      if (!user) window.location.href = "cadastro.html";
+      if (user) {
+        const userId = user.uid;
+        const ref = firebase.database().ref("usuarios/" + userId);
+        ref.once("value").then(snapshot => {
+          const saldo = snapshot.val()?.saldo || 0;
+          document.getElementById("saldo").innerText = saldo.toFixed(2) + " MZN";
+        });
+      } else {
+        window.location.href = "login.html";
+      }
     });
 
-    function logout() {
-      firebase.auth().signOut().then(() => {
-        alert("Sessão encerrada");
-        window.location.href = "cadastro.html";
+    function concluirTarefa(valor) {
+      const user = firebase.auth().currentUser;
+      if (!user) return;
+
+      const ref = firebase.database().ref("usuarios/" + user.uid);
+      ref.get().then(snapshot => {
+        const saldoAtual = snapshot.val()?.saldo || 0;
+        ref.update({ saldo: saldoAtual + valor });
+        alert("Tarefa concluída! + " + valor + " MZN");
+        document.getElementById("saldo").innerText = (saldoAtual + valor).toFixed(2) + " MZN";
       });
     }
+
+    function solicitarSaque() {
+      alert("Seu pedido de levantamento foi enviado ao administrador!");
+    }
   </script>
+
 </body>
-    </html>
+  </html>
