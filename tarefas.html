@@ -78,7 +78,7 @@
       font-size: 18px;
       font-weight: bold;
       color: green;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -103,34 +103,42 @@
 
     <div class="task">
       <h3>📺 Assistir vídeo no YouTube</h3>
-      <p>Assista ao vídeo completo e ganhe <strong>29 MZN</strong></p>
-      <a href="https://youtube.com" target="_blank"><button class="btn" onclick="concluirTarefa(2)">Abrir Tarefa</button></a>
-    </div>
-
-    <div class="task">
-      <h3>📝 Responder pesquisa rápida</h3>
-      <p>Responda 5 perguntas sobre hábitos diários. Ganhe <strong>35 MZN</strong></p>
-      <a href="https://forms.gle" target="_blank"><button class="btn" onclick="concluirTarefa(3)">Responder</button></a>
-    </div>
-
-    <div class="task">
-      <h3>🌐 Visitar site parceiro</h3>
-      <p>Clique no link e permaneça no site por 30 segundos. Ganhe <strong>18 MZN</strong></p>
-      <a href="https://YouTube.com" target="_blank"><button class="btn" onclick="concluirTarefa(1)">Visitar</button></a>
-    </div>
-
-    <div class="task">
-      <h3>📤 Compartilhar nosso link no WhatsApp</h3>
-      <p>Compartilhe com 5 grupos ou amigos. Ganhe <strong>59 MZN</strong></p>
-      <a href="https://wa.me/?text=https://netmovie450.github.io/Tarefaporebook/" target="_blank">
-        <button class="btn" onclick="concluirTarefa(5)">Compartilhar</button>
+      <p>Ganhe <strong>+29 MZN</strong></p>
+      <a href="https://youtube.com" target="_blank">
+        <button class="btn" onclick="concluirTarefa(29)">Abrir</button>
       </a>
     </div>
 
     <div class="task">
-      <h3>📲 Instalar aplicativo sugerido</h3>
-      <p>Baixe e instale o app indicado. Ganhe <strong>79 MZN</strong></p>
-      <a href="https://play.google.com" target="_blank"><button class="btn" onclick="concluirTarefa(7)">Instalar</button></a>
+      <h3>📝 Responder pesquisa</h3>
+      <p>Ganhe <strong>+35 MZN</strong></p>
+      <a href="https://forms.gle" target="_blank">
+        <button class="btn" onclick="concluirTarefa(35)">Responder</button>
+      </a>
+    </div>
+
+    <div class="task">
+      <h3>🌐 Visitar site parceiro</h3>
+      <p>Ganhe <strong>+18 MZN</strong></p>
+      <a href="https://example.com" target="_blank">
+        <button class="btn" onclick="concluirTarefa(18)">Visitar</button>
+      </a>
+    </div>
+
+    <div class="task">
+      <h3>📤 Compartilhar no WhatsApp</h3>
+      <p>Ganhe <strong>+59 MZN</strong></p>
+      <a href="https://wa.me/?text=https://netmovie450.github.io/Tarefaporebook/" target="_blank">
+        <button class="btn" onclick="concluirTarefa(59)">Compartilhar</button>
+      </a>
+    </div>
+
+    <div class="task">
+      <h3>📲 Instalar aplicativo</h3>
+      <p>Ganhe <strong>+79 MZN</strong></p>
+      <a href="https://play.google.com" target="_blank">
+        <button class="btn" onclick="concluirTarefa(79)">Instalar</button>
+      </a>
     </div>
   </div>
 
@@ -143,27 +151,24 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-  <!-- Firebase Config -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyBGAmqoDIy08FOJSWlimG0yXwfKnBbUeas",
       authDomain: "tarefaporebook.firebaseapp.com",
       projectId: "tarefaporebook",
-      storageBucket: "tarefaporebook.firebasestorage.app",
+      storageBucket: "tarefaporebook.appspot.com",
       messagingSenderId: "1040636896600",
       appId: "1:1040636896600:web:cd3003e00e45674ec5f12d"
     };
     firebase.initializeApp(firebaseConfig);
   </script>
 
-  <!-- Script para saldo e tarefas -->
   <script>
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        const uid = user.uid;
-        const ref = firebase.database().ref("usuarios/" + uid);
-        ref.on("value", snapshot => {
-          const saldo = snapshot.val()?.saldo || 0;
+        const ref = firebase.database().ref("usuarios/" + user.uid);
+        ref.on("value", snap => {
+          const saldo = snap.val()?.saldo || 0;
           document.getElementById("saldo").innerText = saldo.toFixed(2) + " MZN";
         });
       } else {
@@ -175,7 +180,6 @@
     function concluirTarefa(valor) {
       const user = firebase.auth().currentUser;
       if (!user) return;
-
       const ref = firebase.database().ref("usuarios/" + user.uid);
       ref.once("value").then(snapshot => {
         const saldoAtual = snapshot.val()?.saldo || 0;
