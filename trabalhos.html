@@ -18,3 +18,44 @@
   </div>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>💼 Trabalhos Pagos</title>
+  <style>
+    body { font-family: sans-serif; background-color: #fff0f0; margin: 0; padding: 20px; color: #333; }
+    h1 { color: #c20000; text-align: center; }
+    .tarefa { background: #fff; border: 1px solid #ccc; padding: 15px; margin: 15px auto; width: 90%; border-radius: 8px; }
+    .btn { background: #c20000; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>💰 Trabalhos Pagos</h1>
+
+  <div class="tarefa">
+    <h3>✅ Visite um site parceiro</h3>
+    <p>Acesse um site e ganhe 15MT</p>
+    <button class="btn" onclick="ganharDinheiro('Visita de site')">Marcar como feito</button>
+  </div>
+
+  <div class="tarefa">
+    <h3>✅ Responda 3 perguntas</h3>
+    <p>Responda perguntas simples e ganhe 21MT</p>
+    <button class="btn" onclick="ganharDinheiro('Inquérito')">Marcar como feito</button>
+  </div>
+
+  <div class="tarefa">
+    <h3>✅ Assista um vídeo</h3>
+    <p>Veja um vídeo publicitário de 30s e ganhe 1MT</p>
+    <button class="btn" onclick="ganharDinheiro('Assistir vídeo')">Marcar como feito</button>
+  </div>
+
+  <script>
+    function ganharDinheiro(tipo) {
+      alert("Tarefa registrada: " + tipo + " ✅");
+      // Aqui você pode adicionar integração com Firebase ou banco de dados
+    }
+  </script>
+</body>
+    </html>
