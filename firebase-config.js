@@ -6,25 +6,12 @@
   const firebaseConfig = {
     apiKey: "AIzaSyBGAmqoDIy08FOJSWlimG0yXwfKnBbUeas",
     authDomain: "tarefaporebook.firebaseapp.com",
+    databaseURL: "https://tarefaporebook-default-rtdb.firebaseio.com",
     projectId: "tarefaporebook",
     storageBucket: "tarefaporebook.appspot.com",
     messagingSenderId: "1040636896600",
     appId: "1:1040636896600:web:cd3003e00e45674ec5f12d"
   };
 
-  // Inicializar Firebase
   firebase.initializeApp(firebaseConfig);
-
-  // Verificar usuário logado e buscar saldo
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      const ref = firebase.database().ref("usuarios/" + user.uid + "/saldo");
-      ref.on("value", snap => {
-        const saldo = snap.val() || 0;
-        document.getElementById("saldo").innerText = saldo.toFixed(2) + " MZN";
-      });
-    } else {
-      window.location.href = "login.html";
-    }
-  });
 </script>
