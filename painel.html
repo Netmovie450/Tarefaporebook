@@ -109,13 +109,14 @@
     <p class="saldo">💰 Seu saldo: <span id="saldo">Carregando...</span></p>
 
     <a href="tarefas.html" class="btn">📄 Ver Todas Tarefas</a>
-    <a href="saldo.html" class="btn">💸 Ver Saldo e Saque</a>
+    <a href="saldo.html" class="btn">💸 Ver Saldo</a>
+    <a href="pagamento.html" class="btn">📤 Solicitar Pagamento</a>
     <a href="#" class="btn" onclick="logout()">🚪 Sair</a>
 
     <div class="task">
-      <h3>📺 Assistir vídeo dentro do site</h3>
+      <h3>🎥 Assistir vídeo para ganhar</h3>
       <p>Ganhe <strong>+10 MZN</strong> assistindo 30 segundos</p>
-      <a href="tarefa-video.html" class="btn">Assistir Agora</a>
+      <a href="tarefa-video.html" class="btn">▶ Assistir Agora</a>
     </div>
   </div>
 
@@ -132,19 +133,21 @@
     const firebaseConfig = {
       apiKey: "AIzaSyBGAmqoDIy08FOJSWlimG0yXwfKnBbUeas",
       authDomain: "tarefaporebook.firebaseapp.com",
+      databaseURL: "https://tarefaporebook-default-rtdb.firebaseio.com",
       projectId: "tarefaporebook",
       storageBucket: "tarefaporebook.appspot.com",
       messagingSenderId: "1040636896600",
       appId: "1:1040636896600:web:cd3003e00e45674ec5f12d"
     };
+
     firebase.initializeApp(firebaseConfig);
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const ref = firebase.database().ref("usuarios/" + user.uid + "/saldo");
         ref.on("value", snap => {
-          const saldo = snap.val() || 0;
-          document.getElementById("saldo").innerText = saldo.toFixed(2) + " MZN";
+          const saldo = snap.val();
+          document.getElementById("saldo").innerText = saldo !== null ? saldo.toFixed(2) + " MZN" : "0.00 MZN";
         });
       } else {
         window.location.href = "login.html";
