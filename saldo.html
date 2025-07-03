@@ -62,7 +62,7 @@
     <a href="painel.html" class="btn">⬅ Voltar ao Painel</a>
   </div>
 
-  <!-- Firebase SDK compat -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
@@ -71,6 +71,7 @@
     const firebaseConfig = {
       apiKey: "AIzaSyBGAmqoDIy08FOJSWlimG0yXwfKnBbUeas",
       authDomain: "tarefaporebook.firebaseapp.com",
+      databaseURL: "https://tarefaporebook-default-rtdb.firebaseio.com",
       projectId: "tarefaporebook",
       storageBucket: "tarefaporebook.appspot.com",
       messagingSenderId: "1040636896600",
@@ -83,8 +84,8 @@
       if (user) {
         const ref = firebase.database().ref("usuarios/" + user.uid + "/saldo");
         ref.on("value", snap => {
-          const saldo = snap.val() || 0;
-          document.getElementById("saldo").innerText = saldo.toFixed(2) + " MZN";
+          const saldo = snap.val();
+          document.getElementById("saldo").innerText = saldo !== null ? saldo.toFixed(2) + " MZN" : "0.00 MZN";
         });
       } else {
         alert("⚠️ Você precisa estar logado.");
@@ -94,4 +95,4 @@
   </script>
 
 </body>
-  </html>
+    </html>
