@@ -3,96 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel do Usuário - Tarefa por eBook</title>
+  <title>Painel - Tarefa por eBook</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffe0e0, #f8bbd0);
       margin: 0;
-      background: linear-gradient(to right, #ffebee, #ffcdd2);
     }
     header {
-      background: linear-gradient(90deg, #d32f2f, #f44336);
+      background-color: #c2185b;
       color: white;
-      padding: 40px 20px;
+      padding: 20px;
       text-align: center;
     }
     nav {
-      background-color: #b71c1c;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 15px;
+      background: #b71c1c;
+      padding: 12px;
     }
     nav a {
       color: white;
-      margin: 10px 20px;
-      text-decoration: none;
+      margin: 0 15px;
       font-weight: 600;
-      transition: 0.3s;
+      text-decoration: none;
     }
     nav a:hover {
-      color: #ffd54f;
+      text-decoration: underline;
     }
     .container {
-      max-width: 800px;
+      max-width: 600px;
       margin: 30px auto;
       background: white;
       border-radius: 16px;
       padding: 30px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    h2 {
+    .container h2 {
       color: #d32f2f;
+      margin-bottom: 10px;
     }
     .saldo {
-      font-size: 24px;
-      color: green;
+      font-size: 26px;
       font-weight: bold;
+      color: green;
       margin: 20px 0;
     }
     .btn {
-      padding: 14px 28px;
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 14px;
       background-color: #d32f2f;
       color: white;
-      border: none;
-      border-radius: 25px;
-      font-size: 16px;
       font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
-      margin: 10px;
       text-decoration: none;
-      display: inline-block;
     }
     .btn:hover {
       background-color: #b71c1c;
-    }
-    .task {
-      background: #fff;
-      padding: 20px;
-      margin-top: 30px;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .task h3 {
-      color: #d32f2f;
-    }
-    footer {
-      background-color: #333;
-      text-align: center;
-      color: white;
-      padding: 20px;
-      font-size: 14px;
-      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>📊 Painel do Usuário</h1>
+    <h1>🎉 Painel do Usuário</h1>
     <p>Gerencie seu progresso, tarefas e saldo com facilidade</p>
   </header>
 
@@ -109,22 +91,12 @@
     <p class="saldo">💰 Seu saldo: <span id="saldo">Carregando...</span></p>
 
     <a href="tarefas.html" class="btn">📄 Ver Todas Tarefas</a>
-    <a href="saldo.html" class="btn">💸 Ver Saldo</a>
-    <a href="pagamento.html" class="btn">📤 Solicitar Pagamento</a>
-    <a href="#" class="btn" onclick="logout()">🚪 Sair</a>
-
-    <div class="task">
-      <h3>🎥 Assistir vídeo para ganhar</h3>
-      <p>Ganhe <strong>+10 MZN</strong> assistindo 30 segundos</p>
-      <a href="tarefa-video.html" class="btn">▶ Assistir Agora</a>
-    </div>
+    <a href="saldo.html" class="btn">💼 Ver Saldo</a>
+    <button onclick="sacarAgora()" class="btn">💸 Sacar Agora</button>
+    <button onclick="logout()" class="btn">🚪 Sair</button>
   </div>
 
-  <footer>
-    &copy; 2025 - Tarefa por eBook | Desenvolvido com ❤️ por Lan Movie
-  </footer>
-
-  <!-- Firebase -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
@@ -142,17 +114,47 @@
 
     firebase.initializeApp(firebaseConfig);
 
+    let saldoAtual = 0;
+    let dadosUsuario = {};
+
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        const ref = firebase.database().ref("usuarios/" + user.uid + "/saldo");
-        ref.on("value", snap => {
-          const saldo = snap.val();
-          document.getElementById("saldo").innerText = saldo !== null ? saldo.toFixed(2) + " MZN" : "0.00 MZN";
+        const ref = firebase.database().ref("usuarios/" + user.uid);
+        ref.on("value", snapshot => {
+          const dados = snapshot.val();
+          saldoAtual = dados?.saldo || 0;
+          dadosUsuario = dados || {};
+          document.getElementById("saldo").innerText = saldoAtual.toFixed(2) + " MZN";
         });
       } else {
+        alert("⚠️ Você precisa estar logado.");
         window.location.href = "login.html";
       }
     });
+
+    function sacarAgora() {
+      const user = firebase.auth().currentUser;
+      if (!user) return;
+
+      if (saldoAtual < 10) {
+        alert("⚠️ Saldo insuficiente. Mínimo: 10 MZN");
+        return;
+      }
+
+      const saque = {
+        nome: dadosUsuario.nome || "Usuário",
+        numero: dadosUsuario.numero || "000000000",
+        metodo: dadosUsuario.metodo || "M-Pesa",
+        valor: saldoAtual,
+        status: "pendente",
+        data: new Date().toLocaleString()
+      };
+
+      firebase.database().ref("pagamentos_auto").push(saque).then(() => {
+        firebase.database().ref("usuarios/" + user.uid).update({ saldo: 0 });
+        alert("✅ Saque automático enviado com sucesso!");
+      });
+    }
 
     function logout() {
       firebase.auth().signOut().then(() => {
@@ -162,4 +164,4 @@
   </script>
 
 </body>
-</html>
+  </html>
